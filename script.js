@@ -101,3 +101,17 @@ function solution() {
     updateDisplay();
   }
 }
+
+document.querySelectorAll('.number').forEach(button => {
+  button.addEventListener('click', () => inputNumber(button.textContent));
+});
+
+document.querySelectorAll('.operator').forEach(button => {
+  button.addEventListener('click', () => handleOperator(button.textContent));
+});
+
+document.querySelector('.equals').addEventListener('click', solution);
+
+document.querySelector('.clear').addEventListener('click', clearCalculator);
+
+document.querySelector('.decimal').addEventListener('click', inputDecimal);
