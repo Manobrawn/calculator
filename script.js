@@ -15,6 +15,18 @@ function divide(a, b) {
   return a / b;
 }
 
+function toggleSign() {
+  if (displayValue !== '0') {
+    displayValue = displayValue.startsWith('-') ? displayValue.slice(1) : `-${displayValue}`;
+    updateDisplay();
+  }
+}
+
+function percent() {
+  displayValue = (parseFloat(displayValue) / 100).toString();
+  updateDisplay();
+}
+
 function operate(operator, a, b) {
   a = parseFloat(a);
   b = parseFloat(b);
@@ -115,3 +127,7 @@ document.querySelector('.equals').addEventListener('click', solution);
 document.querySelector('.clear').addEventListener('click', clearCalculator);
 
 document.querySelector('.decimal').addEventListener('click', inputDecimal);
+
+document.querySelector('.toggle-sign').addEventListener('click', toggleSign);
+
+document.querySelector('.percent').addEventListener('click', percent);
