@@ -55,7 +55,11 @@ function updateDisplay() {
 
   if (displayValue.includes('.') && displayValue.length > 10) {
     display.textContent = parseFloat(displayValue).toFixed(6);
-  } else {
+  }  
+  if(displayValue.length > 10) {
+    display.innerText = displayValue.substring(0, 10);
+  }
+  else {
     display.textContent = displayValue;
   }
 }
