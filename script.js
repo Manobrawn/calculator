@@ -118,16 +118,62 @@ document.querySelectorAll('.number').forEach(button => {
   button.addEventListener('click', () => inputNumber(button.textContent));
 });
 
-document.querySelectorAll('.operator').forEach(button => {
-  button.addEventListener('click', () => handleOperator(button.textContent));
+document.addEventListener('keydown', (event) => {
+  if (!isNaN(event.key)) {
+    inputNumber(event.key);
+  }
 });
 
-document.querySelector('.equals').addEventListener('click', solution);
+document.addEventListener('keydown', (event) => {
+  switch (event.key) {
+    case '*': 
+    case '+': 
+    case '-': 
+    case '/': 
+      const operatorButtons = document.querySelectorAll('.operator');
+      operatorButtons.forEach(button => {
+        if (button.textContent === event.key) {
+          button.click(); 
+        }
+      }); 
+      break;
+    case 'Enter':
+    case '=': 
+      equalsBtn.click(); 
+      break;
+    case '%': 
+      document.querySelector('.percent').click(); 
+      break;
+    case 'Backspace': 
+    case 'Delete':
+      document.querySelector('.clear').click(); 
+      break;
+    case ',': 
+    case '.':
+      document.querySelector('.decimal').click(); 
+      break;
+  }
+});
 
-document.querySelector('.clear').addEventListener('click', clearCalculator);
+const equalsBtn = document.querySelector('.equals');
+const clearBtn = document.querySelector('.clear');
+const operatorBtns = document.querySelectorAll('.operator');
 
+const clearSelectedOperator = () => operatorBtns.forEach(opBtn => opBtn.classList.remove('selected'));;
+
+operatorBtns.forEach(opBtn => {
+  opBtn.addEventListener('click', () => {
+    operatorBtns.forEach(opBtn => opBtn.classList.remove('selected'));
+    opBtn.classList.add('selected');
+    handleOperator(opBtn.textContent);
+  });
+});
+
+equalsBtn.addEventListener('click', () => clearSelectedOperator());
+clearBtn.addEventListener('click', () => clearSelectedOperator());
+
+equalsBtn.addEventListener('click', solution);
+clearBtn.addEventListener('click', clearCalculator);
 document.querySelector('.decimal').addEventListener('click', inputDecimal);
-
 document.querySelector('.toggle-sign').addEventListener('click', toggleSign);
-
 document.querySelector('.percent').addEventListener('click', percent);
