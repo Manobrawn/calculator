@@ -49,6 +49,7 @@ let displayValue = '0';
 let firstOperand = null;
 let activeOperator = null;
 let isSecondOperand = false;
+let resultDisplayed = false;
 
 function updateDisplay() {
   const display = document.querySelector('.display');
@@ -73,7 +74,12 @@ function clearCalculator() {
 }
 
 function inputNumber(number) {
-  if (isSecondOperand) {
+  if (resultDisplayed) {
+    displayValue = number;
+    firstOperand = null;
+    activeOperator = null;
+    resultDisplayed = false;
+  } else if (isSecondOperand) {
     displayValue = number;
     isSecondOperand = false;
   } else {
@@ -105,6 +111,7 @@ function handleOperator(newOperator) {
 
   activeOperator = newOperator;
   isSecondOperand = true;
+  resultDisplayed = false; 
   updateDisplay();
 }
 
@@ -114,6 +121,7 @@ function solution() {
     displayValue = `${result}`;
     firstOperand = result;
     activeOperator = null;
+    resultDisplayed = true; 
     updateDisplay();
   }
 }
