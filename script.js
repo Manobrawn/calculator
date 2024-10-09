@@ -53,12 +53,8 @@ let resultDisplayed = false;
 
 function updateDisplay() {
   const display = document.querySelector('.display');
-
-  if (displayValue.includes('.') && displayValue.length > 10) {
-    display.textContent = parseFloat(displayValue).toFixed(6);
-  }  
   if(displayValue.length > 10) {
-    display.innerText = displayValue.substring(0, 10);
+    display.innerText = displayValue.substring(0, 9) + '…';
   }
   else {
     display.textContent = displayValue;
@@ -89,10 +85,13 @@ function inputNumber(number) {
 }
 
 function inputDecimal() {
-  if (!displayValue.includes('.')) {
+  if (isSecondOperand) {
+    displayValue = '0.';
+    isSecondOperand = false; 
+  } else if (!displayValue.includes('.')) {
     displayValue += '.';
-    updateDisplay();
   }
+  updateDisplay();
 }
 
 function handleOperator(newOperator) {
