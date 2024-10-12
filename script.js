@@ -54,7 +54,7 @@ let resultDisplayed = false;
 function updateDisplay() {
   const display = document.querySelector('.display');
   if(displayValue.length > 10) {
-    display.innerText = displayValue.substring(0, 9) + '…';
+    display.innerText = displayValue.substring(0, 10);
   }
   else {
     display.textContent = displayValue;
